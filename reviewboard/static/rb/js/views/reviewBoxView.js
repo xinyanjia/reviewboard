@@ -36,10 +36,10 @@ RB.ReviewBoxView = RB.CollapsableBoxView.extend({
         var url = document.URL;
         var load_reviewID = url.split('#review')[1];
         if(load_reviewID == this.model.id){
-		this._$box.removeClass('collapsed');
-		this._$expandCollapseButton
-		.removeClass('rb-icon-expand-review')
-		.addClass('rb-icon-collapse-review');
+                this._$box.removeClass('collapsed');
+                this._$expandCollapseButton
+                .removeClass('rb-icon-expand-review')
+                .addClass('rb-icon-collapse-review');
         }
 
         this._$banners = this.$('.banners');
