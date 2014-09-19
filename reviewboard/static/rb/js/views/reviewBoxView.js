@@ -29,17 +29,17 @@ RB.ReviewBoxView = RB.CollapsableBoxView.extend({
         var reviewRequest = this.model.get('parentObject'),
             pageEditState = this.options.pageEditState,
             bugTrackerURL = reviewRequest.get('bugTrackerURL'),
-            review = this.model;
+            review = this.model,
+            url = document.URL,
+            loadReviewID = url.split('#review')[1];
 
         RB.CollapsableBoxView.prototype.render.call(this);
 
-        var url = document.URL;
-        var load_reviewID = url.split('#review')[1];
-        if(load_reviewID == this.model.id){
+        if (loadReviewID == this.model.id){
                 this._$box.removeClass('collapsed');
                 this._$expandCollapseButton
-                .removeClass('rb-icon-expand-review')
-                .addClass('rb-icon-collapse-review');
+                    .removeClass('rb-icon-expand-review')
+                    .addClass('rb-icon-collapse-review');
         }
 
         this._$banners = this.$('.banners');
