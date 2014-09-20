@@ -144,7 +144,7 @@ class ReviewRequestManager(ConcurrencyManager):
             if create_from_commit_id:
                 try:
                     review_request.update_from_commit_id(commit_id)
-                except Exception, e:
+                except Exception as e:
                     review_request.commit_id = commit_id
                     logging.error('Unable to update new review request from '
                                   'commit ID %s: %s',
@@ -290,12 +290,15 @@ class ReviewRequestManager(ConcurrencyManager):
 
     def _query(self, user=None, status='P', with_counts=False,
                extra_query=None, local_site=None, filter_private=False,
-               show_inactive=False):
+               show_inactive=False, show_private=False):
         from reviewboard.reviews.models import Group
 
         is_authenticated = (user is not None and user.is_authenticated())
 
         query = Q(public=True)
+
+        if show_private:
+            query = query | Q(public=False)
 
         if is_authenticated:
             query = query | Q(submitter=user)
