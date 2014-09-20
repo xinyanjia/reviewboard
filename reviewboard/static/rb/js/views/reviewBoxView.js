@@ -35,7 +35,7 @@ RB.ReviewBoxView = RB.CollapsableBoxView.extend({
         RB.CollapsableBoxView.prototype.render.call(this);
 
         // Expand the box if the review is current being linked to
-        if (loadReviewID === this.model.id) {
+        if (loadReviewID == this.model.id) {
             this._$box.removeClass('collapsed');
             this._$expandCollapseButton
                 .removeClass('rb-icon-expand-review')
