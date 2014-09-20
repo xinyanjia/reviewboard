@@ -30,16 +30,19 @@ RB.ReviewBoxView = RB.CollapsableBoxView.extend({
             pageEditState = this.options.pageEditState,
             bugTrackerURL = reviewRequest.get('bugTrackerURL'),
             review = this.model,
-            loadReviewID = document.URL.split('#review')[1];
+            loadReviewID;
 
         RB.CollapsableBoxView.prototype.render.call(this);
 
         // Expand the box if the review is current being linked to
-        if (loadReviewID == this.model.id) {
-            this._$box.removeClass('collapsed');
-            this._$expandCollapseButton
-                .removeClass('rb-icon-expand-review')
-                .addClass('rb-icon-collapse-review');
+        if (document.URL.indexOf("#review") > -1) {
+            loadReviewID = document.URL.split('#review')[1];
+            if (parseInt(loadReviewID, 10) === this.model.id) {
+                this._$box.removeClass('collapsed');
+                this._$expandCollapseButton
+                    .removeClass('rb-icon-expand-review')
+                    .addClass('rb-icon-collapse-review');
+            }
         }
 
         this._$banners = this.$('.banners');
